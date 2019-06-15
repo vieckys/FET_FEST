@@ -13,7 +13,7 @@
 
 <div class="columns">
   <div class="column">
-    <div class="tile notification is-warning">
+    <div class="tile notification is-light">
       <div class="content">
         <h1 class="is-large">
           <span class="icon has-text-info know-icon">
@@ -42,11 +42,11 @@
 
   <div class="column">
     <div class="box">
-      <form method="post" action="/account/login" class="has-text-left">
+      <form method="post" class="has-text-left" [formGroup]="loginForm" (submit)="onSubmit()">
         <div class="field">
           <label class="label">Email</label>
           <div class="control has-icons-left has-icons-right">
-            <input class="input" type="email" placeholder="Email input" />
+            <input class="input" type="email" placeholder="email@valid.ok" formControlName="email" />
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -59,7 +59,7 @@
         <div class="field">
           <label class="label">Password</label>
           <div class="control has-icons-left has-icons-right">
-            <input class="input" type="password" placeholder="password here" />
+            <input class="input" type="password" placeholder="****" formControlName="password" />
             <span class="icon is-small is-left">
               <i class="fas fa-key"></i>
             </span>
@@ -71,7 +71,7 @@
 
         <div class="field">
           <div class="control">
-            <button type="submit" class="button is-primary is-large is-fullwidth">Login now</button>
+            <button type="submit" class="button is-primary is-large is-fullwidth" [disabled]="!loginForm.valid">Login now</button>
           </div>
         </div>
       </form>
