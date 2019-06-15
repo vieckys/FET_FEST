@@ -70,7 +70,7 @@ childRouter.post("/byUser/:id",async function(req,res,next){
         for(let i=0;i<data.length;i++){
 
             data[i].vaccination=await new Promise((resolve, reject)=>{
-                connection.query("SELECT id,	children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done from vaccinations_history where children_id='"+data[i].id+"' and (done='n' or done='N') and data>now() order by id limit 1",function(err,rows){
+                connection.query("SELECT id,	children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done from vaccinations_history where children_id='"+data[i].id+"' and (done='n' or done='N') and date>now() order by id limit 1",function(err,rows){
                     if(err){
                         reject(err);
                     }
