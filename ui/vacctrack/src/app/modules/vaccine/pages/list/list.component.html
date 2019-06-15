@@ -1,6 +1,7 @@
 <section class="hero">
   <div class="hero-body">
     <div class="container">
+      <button class="button is-primary is-pulled-right" routerLink="/vaccine/add/child/{{childId}}">Add vaccine</button>
       <h1 class="title">Vaccine reminders</h1>
       <h2 class="subtitle">For your child</h2>
     </div>
@@ -15,7 +16,7 @@
           <th>Vaccine</th>
           <th>Occuring date</th>
           <th></th>
-          <th></th>
+          <th>Done</th>
         </tr>
       </thead>
       <tbody>
@@ -23,12 +24,15 @@
           <td>{{ vaccine.vaccinName }}</td>
           <td>{{ vaccine.date }}</td>
           <td>
-            <button type="button" class="is-white button" routerLink="/vaccine/child/{{ vaccine.children_id }}/{{ vaccine.id }}/edit">Edit</button>
+            <button type="button" class="is-white button is-small is-primary is-outlined is-rounded" routerLink="/vaccine/child/{{ vaccine.children_id }}/{{ vaccine.id }}/edit">Edit</button>
           </td>
           <th>
-            <label class="checkbox">
+            <label class="checkbox" *ngIf="vaccine.done == 'N'">
               <input type="checkbox" (change)="vaccineDone(vaccine.id)" />
               Done
+            </label>
+            <label for="" *ngIf="vaccine.done == 'Y'">
+              Completed
             </label>
           </th>
         </tr>

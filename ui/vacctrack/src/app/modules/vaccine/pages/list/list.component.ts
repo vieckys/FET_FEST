@@ -29,4 +29,8 @@ export class ListComponent implements OnInit {
     )
   }
 
+  vaccineDone(id) {
+    this.vaccineService.update({children_id: this.childId, id: id, done: 'Y'});
+  }
+
 }

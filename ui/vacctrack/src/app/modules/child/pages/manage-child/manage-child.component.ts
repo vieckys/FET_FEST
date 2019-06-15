@@ -72,7 +72,7 @@ export class ManageChildComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.editChild) {
+    if (this.editFlag) {
       this.childService.update(this.childForm.value);
     } else {
       this.childService.add(this.childForm.value);

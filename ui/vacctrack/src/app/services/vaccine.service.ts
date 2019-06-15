@@ -21,9 +21,24 @@ export class VaccineService {
     );
   }
 
+  update(postData) {
+    this.http.put(`${this.url}${postData.id}`, postData).subscribe(res => {
+      return res;
+    });
+  }
+
   add(postData) {
     this.http.post(`${this.url}`, postData).subscribe(res => {
       console.log(res);
     });
+  }
+
+  editVaccine(postData): Observable<any> {
+    return this.http.get(`${this.url}${postData.children_id}/${postData.id}`).pipe(
+      map((res: Response) => {
+        return res;
+      }),
+      catchError(d => d)
+    );
   }
 }
