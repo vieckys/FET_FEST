@@ -20,4 +20,10 @@ export class VaccineService {
       })
     );
   }
+
+  add(postData) {
+    this.http.post(`${this.url}`, postData).subscribe(res => {
+      console.log(res);
+    });
+  }
 }
