@@ -1,15 +1,38 @@
-<table class="table">
-  <tbody>
-    <tr *ngFor="let vaccine of vaccineList">
-      <td>{{vaccine.vaccinName}}</td>
-      <td>{{vaccine.date}}</td>
-      <td><button type="button" class="is-white button" routerLink="/vaccine/child/{{vaccine.children_id}}/{{vaccine.id}}/edit">Edit</button></td>
-      <th>
-        <label class="checkbox">
-          <input type="checkbox" (change)="vaccineDone(vaccine.id)" />
-          Done
-        </label>
-      </th>
-    </tr>
-  </tbody>
-</table>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">Vaccine reminders</h1>
+      <h2 class="subtitle">For your child</h2>
+    </div>
+  </div>
+</section>
+
+<div class="columns">
+  <div class="column is-full">
+    <table class="table is-striped is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th>Vaccine</th>
+          <th>Occuring date</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vaccine of vaccineList">
+          <td>{{ vaccine.vaccinName }}</td>
+          <td>{{ vaccine.date }}</td>
+          <td>
+            <button type="button" class="is-white button" routerLink="/vaccine/child/{{ vaccine.children_id }}/{{ vaccine.id }}/edit">Edit</button>
+          </td>
+          <th>
+            <label class="checkbox">
+              <input type="checkbox" (change)="vaccineDone(vaccine.id)" />
+              Done
+            </label>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
