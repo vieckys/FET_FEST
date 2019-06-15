@@ -13,7 +13,7 @@
 
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-end">
-      <div class="navbar-item" *ngIf="!isLoggedIn">
+      <div class="navbar-item" *ngIf="!isAuth">
         <div class="buttons">
           <a class="button is-warning" routerLink="/auth/register">
             <strong>Sign up</strong>
@@ -24,12 +24,12 @@
         </div>
       </div>
 
-      <div class="navbar-item" *ngIf="isLoggedIn">
+      <div class="navbar-item" *ngIf="isAuth">
           <div class="buttons">
-            <label class="username" for="">Hello, {{user?.name}}</label>
-            <button type="button" class="is-link is-light logout" (click)="onLogout()">
+            <label class="username" for="">Hello, {{user.name}}</label>
+            <a type="button" class="button is-white logout" (click)="onLogout()">
               Logout
-            </button>
+            </a>
           </div>
         </div>
     </div>

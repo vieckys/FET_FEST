@@ -1,6 +1,6 @@
 <div class="column">
   <h1 class="title">Manage child</h1>
-  <h2 class="subtitle">Edit > {{singleRecord?.name}}</h2>
+  <h2 class="subtitle">{{editFlag ? 'Edit' : 'Add' }}</h2>
 </div>
 
 <div class="column is-4">
@@ -82,7 +82,7 @@
       <div class="field">
         <div class="control">
           <button type="submit" class="button is-primary is-large is-fullwidth">
-            Add Child
+            {{editFlag ? 'Edit child' : 'Add child'}}
           </button>
         </div>
       </div>

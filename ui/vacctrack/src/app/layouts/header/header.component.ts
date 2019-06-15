@@ -10,26 +10,33 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   user: any;
-  isLoggedIn: boolean;
+  isAuth: boolean;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
+    this.checkIfLogin();
+    this.authService.isLoggedIn.subscribe((res: boolean) => {
+      this.isAuth = res;
+    });
+  }
+
+  checkIfLogin() {
+    if (window.localStorage.getItem('vc_user')) {
+      this.isAuth = true;
+    } else {
+      this.isAuth = false;
+    }
     this.getUser();
   }
 
   getUser() {
-    if (this.isLoggedIn) {
-      this.user = this.authService.getUser();
-    }
+    this.user = this.authService.getUser();
   }
 
   onLogout() {
     window.localStorage.removeItem('vc_user');
+    this.checkIfLogin();
     this.router.navigate(['/home']);
-    // this.authService.isLoggedIn().subscribe(customObject => {
-    //   this.isLoggedIn = customObject;
-    // });
-    // this.authService.logout();
   }
 }

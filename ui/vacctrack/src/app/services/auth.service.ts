@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ServerResponse } from 'src/app/models/response.model';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -11,15 +11,9 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class AuthService {
   url = `${environment.API_ENDPOINT}user/`;
-  @Output() fireIsLoggedIn: EventEmitter<any> = new EventEmitter<any>();
+  @Output() isLoggedIn = new Subject();
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  isLoggedIn() {
-    if (window.localStorage.getItem('vc_user')) {
-      return true;
-    }
-  }
 
   register(postData): Observable<any> {
     return this.http.post(`${this.url}signup`, postData).pipe(
@@ -33,6 +27,7 @@ export class AuthService {
     return this.http.post(`${this.url}signin`, postData).pipe(
       map((res: ServerResponse) => {
         if (res.status === 1) {
+          this.isLoggedIn.next(true);
           this.setSession(res.data[0]);
           this.router.navigate(['/dashboard']);
         } else {
@@ -49,7 +44,6 @@ export class AuthService {
   logout() {
     window.localStorage.removeItem('vc_user');
     this.router.navigate(['/home']);
-    this.fireIsLoggedIn.emit(false);
   }
 
   setSession(user) {

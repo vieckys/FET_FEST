@@ -14,7 +14,7 @@ export class ManageComponent implements OnInit {
   singleRecord: any;
   childId: any;
   id: any;
-  constructor(private vaccineService : VaccineService, private router: ActivatedRoute) { }
+  constructor(private vaccineService : VaccineService, private router: ActivatedRoute, private route: Router) { }
 
   ngOnInit() {
     this.router.params.subscribe(param => {
@@ -61,8 +61,10 @@ export class ManageComponent implements OnInit {
   onSubmit() {
     if (this.editFlag) {
       this.vaccineService.update(this.vaccineForm.value);
+      this.route.navigate(['/vaccine/list/child', this.childId]);
     } else {
       this.vaccineService.add(this.vaccineForm.value);
+      this.route.navigate(['/vaccine/list/child', this.childId]);
     }
   }
 
