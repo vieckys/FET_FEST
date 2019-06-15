@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChildService } from 'src/app/services/child.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-manage-child',
@@ -16,7 +17,13 @@ export class ManageChildComponent implements OnInit {
   childId: any;
   userId = this.authService.getUser().id;
 
-  constructor(private authService: AuthService, private childService: ChildService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private childService: ChildService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private datePipe: DatePipe
+  ) {}
 
   ngOnInit() {
     this.route.params.subscribe(param => {
@@ -36,22 +43,21 @@ export class ManageChildComponent implements OnInit {
     const data = {
       id: this.childId,
       user_id: this.userId
-    }
-    this.childService.editChild(data).subscribe(
-      res => {
-        console.log(res);
-      }
-    )
+    };
+    this.childService.editChild(data).subscribe(res => {
+      this.singleRecord = res.data[0];
+      this.initForm();
+      console.log(res);
+    });
   }
 
   initForm() {
-    let name: string;
-    let dob: string;
-    let gender: string;
-    let weight: string;
-    let height: string;
-    let comments: string;
-    let user_id = this.authService.getUser().id;
+    let name: string = this.singleRecord ? this.singleRecord.name : '';
+    let dob: string = this.singleRecord ? this.datePipe.transform(this.singleRecord.dob, 'dd-MM-yyyy') : '';
+    let gender: string = this.singleRecord ? this.singleRecord.gender : '';
+    let weight: string = this.singleRecord ? this.singleRecord.weight : '';
+    let height: string = this.singleRecord ? this.singleRecord.height : '';
+    let comments: string = this.singleRecord ? this.singleRecord.comments : '';
 
     this.childForm = new FormGroup({
       name: new FormControl(name, Validators.required),
@@ -60,7 +66,7 @@ export class ManageChildComponent implements OnInit {
       weight: new FormControl(weight, Validators.required),
       height: new FormControl(height, Validators.required),
       comments: new FormControl(comments, Validators.required),
-      user_id: new FormControl(user_id)
+      user_id: new FormControl(this.userId)
     });
   }
 
