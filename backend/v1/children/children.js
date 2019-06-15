@@ -53,7 +53,7 @@ childRouter.delete("/:id",function(req,res,next){
 childRouter.post("/byUser/:id",async function(req,res,next){
     if(req.body){
         let data=await new Promise((resolve, reject)=>{
-            connection.query("SELECT * from children where user_id='"+req.body.id+"'",function(err,rows){
+            connection.query("SELECT id,name,DATE_FORMAT(dob, \"%d-%m-%Y\") as date,gender,comments,height,weight,user_id from children where user_id='"+req.body.id+"'",function(err,rows){
                 if(err){
                     reject(err);
                 }
@@ -70,7 +70,7 @@ childRouter.post("/byUser/:id",async function(req,res,next){
         for(let i=0;i<data.length;i++){
 
             data[i].vaccination=await new Promise((resolve, reject)=>{
-                connection.query("SELECT id,	children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done from vaccinations_history where children_id='"+data[i].id+"' and (done='n' or done='N') order by id limit 1",function(err,rows){
+                connection.query("SELECT id,	children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%d-%m-%Y\") as date,done from vaccinations_history where children_id='"+data[i].id+"' and (done='n' or done='N') order by id limit 1",function(err,rows){
                     if(err){
                         reject(err);
                     }
@@ -93,7 +93,7 @@ childRouter.post("/byUser/:id",async function(req,res,next){
 
 childRouter.post("/:id",function(req,res,next){
     if(req.body){
-        connection.query("SELECT * from children where id='"+req.body.id+"' AND user_id='"+req.body.user_id+"'",function(err,rows){
+        connection.query("SELECT id,name,DATE_FORMAT(dob, \"%d-%m-%Y\") as date,gender,comments,height,weight,user_id from children where id='"+req.body.id+"' AND user_id='"+req.body.user_id+"'",function(err,rows){
             if(err){
                 next(err);
             }
