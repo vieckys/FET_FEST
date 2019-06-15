@@ -1,3 +1,83 @@
-<p>
-  manage-child works!
-</p>
+<div class="column">
+  <div class="box">
+    <form method="post" [formGroup]="childForm" (submit)="onSubmit()" class="has-text-left">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="Enter Child name" formControlName="name" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="control">
+          <label class="radio">
+            <input type="radio" value="male" name="gender" formControlName="gender"/>
+            Male
+          </label>
+          <label class="radio">
+            <input type="radio" value="female" name="gender" formControlName="gender" />
+            Female
+          </label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Date of Birth</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="date" placeholder="DOB" formControlName="dob"/>
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">weight</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="weight in kgs" formControlName="weight" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">height</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input" type="text" placeholder="height in cms" formControlName="height" />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Comments</label>
+        <div class="control has-icons-left has-icons-right">
+            <textarea class="textarea" placeholder="comments" formControlName="comments"></textarea>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <button type="submit" class="button is-primary is-large is-fullwidth">
+            Add Child
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
