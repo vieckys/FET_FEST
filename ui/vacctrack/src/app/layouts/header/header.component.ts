@@ -15,10 +15,7 @@ export class HeaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn().subscribe(customObject => {
-      this.isLoggedIn = customObject;
-      this.getUser();
-    });
+    this.getUser();
   }
 
   getUser() {
@@ -30,9 +27,9 @@ export class HeaderComponent implements OnInit {
   onLogout() {
     window.localStorage.removeItem('vc_user');
     this.router.navigate(['/home']);
-    this.authService.isLoggedIn().subscribe(customObject => {
-      this.isLoggedIn = customObject;
-    });
+    // this.authService.isLoggedIn().subscribe(customObject => {
+    //   this.isLoggedIn = customObject;
+    // });
     // this.authService.logout();
   }
 }

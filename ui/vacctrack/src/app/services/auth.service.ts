@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ServerResponse } from 'src/app/models/response.model';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,25 +16,34 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   isLoggedIn() {
-    return this.fireIsLoggedIn;
+    if (window.localStorage.getItem('vc_user')) {
+      return true;
+    }
   }
 
-  register(postData) {
-    this.http.post(`${this.url}signup`, postData).subscribe(res => {
-      console.log(res);
-    });
+  register(postData): Observable<any> {
+    return this.http.post(`${this.url}signup`, postData).pipe(
+      map(res => {
+        return res;
+      })
+    );
   }
 
-  login(postData) {
-    this.http.post(`${this.url}signin`, postData).subscribe((res: ServerResponse) => {
-      if (res.status === 1) {
-        this.fireIsLoggedIn.emit(true);
-        this.setSession(res.data[0]);
-        this.router.navigate(['/dashboard']);
-      } else {
-        alert('Error occured');
-      }
-    });
+  login(postData): Observable<any> {
+    return this.http.post(`${this.url}signin`, postData).pipe(
+      map((res: ServerResponse) => {
+        if (res.status === 1) {
+          this.setSession(res.data[0]);
+          this.router.navigate(['/dashboard']);
+        } else {
+          alert('Error occured');
+        }
+      }),
+      catchError(err => {
+        console.log(err);
+        return err;
+      })
+    );
   }
 
   logout() {
