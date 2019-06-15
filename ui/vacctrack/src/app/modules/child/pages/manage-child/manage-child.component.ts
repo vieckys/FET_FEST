@@ -74,8 +74,9 @@ export class ManageChildComponent implements OnInit {
   onSubmit() {
     if (this.editChild) {
       this.childService.update(this.childForm.value);
+    } else {
+      this.childService.add(this.childForm.value);
     }
-    this.childService.add(this.childForm.value);
 
     console.log(this.childForm.value);
   }
