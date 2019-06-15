@@ -35,12 +35,12 @@ export class ChildCardComponent implements OnInit {
   notifyMe(data) {
     console.log('----->', data);
     let daysDiff = 2;
-    //let currentDate = new Date();
-    //let nextVaccineDate = new Date(data.vaccine.date);
+    let currentDate = new Date();
+    let nextVaccineDate = new Date(data.vaccination[0].date);
 
-    //console.log(currentDate , nextVaccineDate );
+    console.log(currentDate , nextVaccineDate );
 
-    //daysDiff = Math.ceil(Math.abs(nextVaccineDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
+    daysDiff = Math.ceil(Math.abs(nextVaccineDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
 
     console.log('------->', daysDiff);
 
@@ -55,7 +55,7 @@ export class ChildCardComponent implements OnInit {
     if(this.notificationGranted()){
         var notification = new Notification('VaccTrack Notification', {
           icon: '',
-          body: `Next Vaccine Due for ${data.name} on | ${data.vaccine.name}`,
+          body: `Next Vaccine Due for ${data.name} on | ${data.vaccination[0].vaccinName}`,
           lang: 'en',
           dir: 'auto'
         });
