@@ -35,10 +35,10 @@ export class ChildCardComponent implements OnInit {
   notifyMe(data) {
     console.log('----->', data);
     let daysDiff = 2;
-    let currentDate = new Date();
-    let nextVaccineDate = new Date(data.vaccine.date);
+    //let currentDate = new Date();
+    //let nextVaccineDate = new Date(data.vaccine.date);
 
-    console.log(currentDate , nextVaccineDate );
+    //console.log(currentDate , nextVaccineDate );
 
     //daysDiff = Math.ceil(Math.abs(nextVaccineDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
 
