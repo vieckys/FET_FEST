@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       console.log(res);
 
       if(res.status == 1) {
-        window.location.href == '/dashboard';
+        window.location.href = '/dashboard';
       }
     });
   }
