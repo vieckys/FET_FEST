@@ -17,7 +17,7 @@
           <p>DOB: <strong>{{child?.dob}}</strong></p>
           <p>gender: <strong>{{child?.gender}}</strong></p>
           <p>Next Vaccine Due <strong>{{child?.vaccination[0].vaccinName}}</strong> | <strong>{{child?.vaccination[0].date}}</strong></p>
-          <button class="is-link" (click)="notifyMe(child)">Remind Me</button>
+          <button class="button is-outlined" (click)="notifyMe(child)">Remind Me</button>
         </div>
     
         <footer class="card-footer">
