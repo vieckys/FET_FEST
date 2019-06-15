@@ -37,6 +37,19 @@ childRouter.put("/:id",function(req,res,next){
     }
 });
 
+childRouter.delete("/:id",function(req,res,next){
+    if(req.body){
+        connection.delete("children",req.body,{id:{operator:'=', value:req.body.id}},function(err,rows){
+            if(err){
+                next(err);
+            }
+            res.send({message:"Children Detail Deleted Successfully",status:1,data:rows});
+        });
+    }else{
+        next("No data Found in Body");
+    }
+});
+
 childRouter.post("/byUser/:id",async function(req,res,next){
     if(req.body){
         let data=await new Promise((resolve, reject)=>{
@@ -51,6 +64,8 @@ childRouter.post("/byUser/:id",async function(req,res,next){
                 }
                 
             });
+        }).catch((err)=>{
+            next(err);
         });
         for(let i=0;i<data.length;i++){
 
@@ -66,6 +81,8 @@ childRouter.post("/byUser/:id",async function(req,res,next){
                     }
                     
                 });
+            }).catch((err)=>{
+                next(err);
             });
         }
         res.send({message:"Children Details",status:1,data:data});
@@ -85,7 +102,6 @@ childRouter.post("/:id",function(req,res,next){
             }else{
                 next("No children available with given id");
             }
-            
         });
     }else{
         next("No data Found in Body");

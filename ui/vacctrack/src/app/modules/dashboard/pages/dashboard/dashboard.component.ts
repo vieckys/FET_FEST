@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
         this.childs = res;
       }
     )
-    console.log(this.childs)
+    console.log(this.childs);
    }
 
   ngOnInit() {
