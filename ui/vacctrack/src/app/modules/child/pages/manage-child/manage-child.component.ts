@@ -52,14 +52,15 @@ export class ManageChildComponent implements OnInit {
   }
 
   initForm() {
-    let name: string = this.singleRecord ? this.singleRecord.name : '';
-    let dob: string = this.singleRecord ? this.datePipe.transform(this.singleRecord.dob, 'dd-MM-yyyy') : '';
-    let gender: string = this.singleRecord ? this.singleRecord.gender : '';
-    let weight: string = this.singleRecord ? this.singleRecord.weight : '';
-    let height: string = this.singleRecord ? this.singleRecord.height : '';
-    let comments: string = this.singleRecord ? this.singleRecord.comments : '';
+    let name = this.singleRecord ? this.singleRecord.name : '';
+    let dob = this.singleRecord ? this.singleRecord.dob : '';
+    let gender = this.singleRecord ? this.singleRecord.gender : '';
+    let weight = this.singleRecord ? this.singleRecord.weight : '';
+    let height = this.singleRecord ? this.singleRecord.height : '';
+    let comments = this.singleRecord ? this.singleRecord.comments : '';
 
     this.childForm = new FormGroup({
+      id: new FormControl(this.childId),
       name: new FormControl(name, Validators.required),
       dob: new FormControl(dob, Validators.required),
       gender: new FormControl(gender, Validators.required),
@@ -71,6 +72,9 @@ export class ManageChildComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.editChild) {
+      this.childService.update(this.childForm.value);
+    }
     this.childService.add(this.childForm.value);
 
     console.log(this.childForm.value);

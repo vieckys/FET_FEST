@@ -6,6 +6,7 @@
 <div class="column is-4">
   <div class="box">
     <form method="post" [formGroup]="childForm" (submit)="onSubmit()" class="has-text-left">
+      <input type="hidden" formControlName="id" />
       <div class="field">
         <label class="label">Name</label>
         <div class="control has-icons-left has-icons-right">
@@ -36,7 +37,7 @@
       <div class="field">
         <label class="label">Date of Birth</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" type="date" placeholder="DOB" formControlName="dob"/>
+          <input class="input" type="text" placeholder="yyyy-mm-dd" formControlName="dob"/>
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>

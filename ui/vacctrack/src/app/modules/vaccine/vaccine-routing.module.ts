@@ -7,15 +7,15 @@ const routes: Routes = [
   {
     path: '',
     children: [{
-      path: 'list',
+      path: 'list/child/:childId',
       component: ListComponent
     },
     {
-      path: ':id/:childId/edit',
+      path: 'child/:childId/:id/edit',
       component: ManageComponent
     },
     {
-      path: 'add',
+      path: 'add/child/:childId',
       component: ManageComponent
     }]
   }

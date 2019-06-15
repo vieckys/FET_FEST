@@ -19,6 +19,12 @@ export class ChildService {
     });
   }
 
+  update(postData) {
+    this.http.put(`${this.url}`, postData).subscribe(res => {
+      return res;
+    });
+  }
+
   getAll(postData): Observable<any> {
     return this.http.post(`${this.url}byUser/${postData.id}`, postData).pipe(
       map((res: ServerResponse) => {
