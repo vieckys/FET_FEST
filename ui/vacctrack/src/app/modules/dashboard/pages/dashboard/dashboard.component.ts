@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
     vaccine: {
       id: 1,
       name: 'Polio',
-      date: '17-05-2019'
+      date: '2019-06-17'
     }
   }, {
     id: 2,
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     vaccine: {
       id: 1,
       name: 'Polio',
-      date: '18-05-2019'
+      date: '2019-06-18'
     }
   }];
 

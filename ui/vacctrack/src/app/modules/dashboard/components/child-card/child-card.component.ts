@@ -7,9 +7,6 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChildCardComponent implements OnInit {
   @Input() child;
-
-  dayDiff: number = 2;
-
   constructor() {
    }
 
@@ -37,8 +34,17 @@ export class ChildCardComponent implements OnInit {
 
   notifyMe(data) {
     console.log('----->', data);
+    let daysDiff;
+    let currentDate = new Date();
+    let nextVaccineDate = new Date(data.vaccine.date);
 
-    if (this.dayDiff < 3) {
+    console.log(currentDate , nextVaccineDate );
+
+    daysDiff = Math.ceil(Math.abs(nextVaccineDate.getTime() - currentDate.getTime()) / (1000*60*60*24));
+
+    console.log('------->', daysDiff);
+
+    if (daysDiff < 3) {
       setInterval(() => {
         this.createNotification(data);
       }, 10000); 
