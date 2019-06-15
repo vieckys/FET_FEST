@@ -7,15 +7,15 @@ userRouter.post("/signup",function(req,res,next){
         connection.insert("user",req.body,function(err,rows){
             if(err){
                 if(err.sqlMessage.indexOf("Duplicat")!=-1){
-                    next("Email Id already exist");
+                    next("Email id already exist");
                 }else{
                     next(err);
                 }
             }
-            res.send({message:"Signup Successfully",status:1,data:rows});
+            res.send({message:"Signup Successfully",status:1,data:null});
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -33,7 +33,7 @@ userRouter.post("/signin",function(req,res,next){
             
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 module.exports=userRouter;

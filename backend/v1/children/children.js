@@ -10,17 +10,17 @@ childRouter.post("/",function(req,res,next){
             if(err){
                 next(err);
             }
-            res.send({message:"Children Detail added",status:1,data:rows});
+            res.send({message:"Children detail added",status:1,data:rows});
             req.body.id=rows.insertId;
             await vaccination.createVaccinationSchedule(req.body).then((data)=>{
-                console.log("Vaccination Schedule created");
+                console.log("Vaccination schedule created");
             }).catch((err)=>{
                 next(err);
             });
 
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -30,10 +30,10 @@ childRouter.put("/",function(req,res,next){
             if(err){
                 next(err);
             }
-            res.send({message:"Children Detail Updated Successfully",status:1,data:rows});
+            res.send({message:"Children detail updated successfully",status:1,data:rows});
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -43,10 +43,10 @@ childRouter.delete("/:id",function(req,res,next){
             if(err){
                 next(err);
             }
-            res.send({message:"Children Detail Deleted Successfully",status:1,data:rows});
+            res.send({message:"Children detail deleted successfully",status:1,data:rows});
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -65,7 +65,7 @@ childRouter.post("/byUser/:id",async function(req,res,next){
                 
             });
         }).catch((err)=>{
-            next(err);
+           return next(err);
         });
         for(let i=0;i<data.length;i++){
 
@@ -77,17 +77,17 @@ childRouter.post("/byUser/:id",async function(req,res,next){
                     if(rows!=null && rows.length>0){
                         resolve(rows);
                     }else{
-                        reject("No children available for user");
+                        reject("No vaccinations_history available for children");
                     }
                     
                 });
             }).catch((err)=>{
-                next(err);
+                return next(err);
             });
         }
-        res.send({message:"Children Details",status:1,data:data});
+        res.send({message:"Children details",status:1,data:data});
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -95,16 +95,16 @@ childRouter.post("/:id",function(req,res,next){
     if(req.body){
         connection.query("SELECT id,name,DATE_FORMAT(dob, \"%Y-%m-%d\") as dob,gender,comments,height,weight,user_id from children where id='"+req.body.id+"' AND user_id='"+req.body.user_id+"'",function(err,rows){
             if(err){
-                next(err);
+                return next(err);
             }
             if(rows!=null && rows.length>0){
-                res.send({message:"Children Details",status:1,data:rows});
+                res.send({message:"Children details",status:1,data:rows});
             }else{
                 next("No children available with given id");
             }
         });
     }else{
-        next("No data Found in Body");
+        return next("No data found in body");
     }
 });
 module.exports=childRouter;

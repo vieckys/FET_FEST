@@ -3,6 +3,7 @@ let bodyParser = require('body-parser');
 let v1 = require('./v1/v1');
 
 let app=express();
+app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({
     extended : false
 }));

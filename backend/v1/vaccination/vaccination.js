@@ -19,7 +19,7 @@ async function createVaccinationSchedule(childrenDetil){
                             if(err){
                                 rej(err);
                             }
-                            res({message:"vaccinations_history Detail added",status:1,data:row});
+                            res({message:"vaccinations_history detail added",status:1,data:row});
                         });
                     }).catch((err)=>{
                         reject(err);
@@ -47,7 +47,7 @@ vaccinationRouter.post("/",function(req,res,next){
             res.send({message:"Vaccination Detail added",status:1,data:rows});
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -57,10 +57,10 @@ vaccinationRouter.put("/:id",function(req,res,next){
             if(err){
                 next(err);
             }
-            res.send({message:"Vaccination Detail Updated Successfully",status:1,data:rows});
+            res.send({message:"Vaccination detail updated successfully",status:1,data:rows});
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in body");
     }
 });
 
@@ -71,16 +71,35 @@ vaccinationRouter.post("/:id",function(req,res,next){
                 next(err);
             }
             if(rows!=null && rows.length>0){
-                res.send({message:"Vaccination schedule Details",status:1,data:rows});
+                res.send({message:"Vaccination schedule details",status:1,data:rows});
             }else{
-                next("No Vaccination schedule Details available with given children id");
+                next("No vaccination schedule details available with given children id");
             }
             
         });
     }else{
-        next("No data Found in Body");
+        next("No data found in dody");
     }
 });
+
+vaccinationRouter.get("/:id/:vaccineid",function(req,res,next){
+    if(req.body){
+        connection.query("SELECT  id,children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done  from vaccinations_history where children_id='"+req.params.id+"' and vaccin_id='"+req.params.vaccineid+"'",function(err,rows){
+            if(err){
+                next(err);
+            }
+            if(rows!=null && rows.length>0){
+                res.send({message:"Vaccination schedule details",status:1,data:rows});
+            }else{
+                next("No vaccination schedule details available with given children id");
+            }
+            
+        });
+    }else{
+        next("No data found in dody");
+    }
+});
+
 module.exports={
     createVaccinationSchedule:createVaccinationSchedule,
     router:vaccinationRouter
