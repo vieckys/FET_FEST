@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChildService } from 'src/app/services/child.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-manage-child',
@@ -10,11 +11,37 @@ import { ChildService } from 'src/app/services/child.service';
 })
 export class ManageChildComponent implements OnInit {
   childForm: FormGroup;
+  editFlag = false;
+  singleRecord: any;
+  childId: any;
+  userId = this.authService.getUser().id;
 
-  constructor(private authService: AuthService, private childService: ChildService) { }
+  constructor(private authService: AuthService, private childService: ChildService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.params.subscribe(param => {
+      if (param.id) {
+        this.editFlag = true;
+        this.childId = param.id;
+      }
+    });
+
+    if (this.editFlag) {
+      this.editChild();
+    }
     this.initForm();
+  }
+
+  editChild() {
+    const data = {
+      id: this.childId,
+      user_id: this.userId
+    }
+    this.childService.editChild(data).subscribe(
+      res => {
+        console.log(res);
+      }
+    )
   }
 
   initForm() {
@@ -42,5 +69,4 @@ export class ManageChildComponent implements OnInit {
 
     console.log(this.childForm.value);
   }
-
 }

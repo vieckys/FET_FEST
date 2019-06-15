@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ServerResponse } from 'src/app/models/response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,12 @@ export class ChildService {
     });
   }
 
-  getAll(postData) {
-    this.http.post(`${this.url}byUser/${postData.id}`, postData).subscribe(res => {
-      console.log(res);
-    });;
+  getAll(postData): Observable<any> {
+    return this.http.post(`${this.url}byUser/${postData.id}`, postData).pipe(
+      map((res: ServerResponse) => {
+        return res.data;
+      })
+    );
   }
 
   editChild(postData): Observable<any> {

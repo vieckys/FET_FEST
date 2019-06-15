@@ -16,10 +16,12 @@ export class DashboardComponent implements OnInit {
 
    getAllChildren() {
     this.userId = this.authService.getUser().id;
-
-    this.childs = this.childService.getAll({
-      id: this.userId
-    });
+    this.childService.getAll({id: this.userId}).subscribe(
+      res => {
+        this.childs = res;
+      }
+    )
+    console.log(this.childs)
    }
 
   ngOnInit() {

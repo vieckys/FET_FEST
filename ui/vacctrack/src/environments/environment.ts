@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_ENDPOINT: 'https://m7gx0fbh98.execute-api.us-east-1.amazonaws.com/latest/v1/'
+  // API_ENDPOINT: 'https://m7gx0fbh98.execute-api.us-east-1.amazonaws.com/latest/v1/'
+  API_ENDPOINT: 'http://localhost:3000/v1/'
 };
 
 /*
