@@ -1,3 +1,63 @@
-<p>
-  register works!
-</p>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        Register here
+      </h1>
+      <h2 class="subtitle">
+        Get your free account in seconds
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div class="columns">
+  <div class="column">
+    <app-info></app-info>
+  </div>
+
+  <div class="column">
+    <div class="box">
+      <form method="post" class="has-text-left" [formGroup]="registerForm" (submit)="onSubmit()">
+        <div class="field">
+          <label class="label">Name</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="your name" formControlName="name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="email" placeholder="email@valid.ok" formControlName="email" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right has-text-success" *ngIf="registerForm['controls'].email.valid">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="input" type="password" placeholder="****" formControlName="password" />
+            <span class="icon is-small is-left">
+              <i class="fas fa-key"></i>
+            </span>
+            <span class="icon is-small is-right has-text-success" *ngIf="registerForm['controls'].password.valid">
+              <i class="fas fa-check"></i>
+            </span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <button type="submit" class="button is-primary is-large is-fullwidth" [disabled]="!registerForm.valid">Register now</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
