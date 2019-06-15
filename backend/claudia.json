@@ -1,10 +1,10 @@
 {
   "lambda": {
-    "role": "testapp-executor",
-    "name": "testapp",
+    "role": "vacctrack-executor",
+    "name": "vacctrack",
     "region": "us-east-1"
   },
   "api": {
-    "id": "462pjerakl"
+    "id": "m7gx0fbh98"
   }
 }
