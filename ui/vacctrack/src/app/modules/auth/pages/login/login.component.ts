@@ -29,6 +29,10 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.loginForm.value).subscribe(res => {
       console.log(res);
+
+      if(res.status == 1) {
+        window.location.href == '/dashboard';
+      }
     });
   }
 }
