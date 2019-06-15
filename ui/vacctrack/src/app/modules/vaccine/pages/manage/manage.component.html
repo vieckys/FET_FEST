@@ -1,3 +1,60 @@
-<p>
-  manage works!
-</p>
+<section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Add Vaccine
+        </h1>
+      </div>
+    </div>
+  </section>
+  
+  <div class="columns">
+    <div class="column">
+      <div class="box">
+        <form method="post" class="has-text-left" [formGroup]="vaccineForm" (submit)="onSubmit()">
+          <div class="field">
+            <label class="label">Vaccine Name</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Vaccine Name" formControlName="vaccinName" />
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon is-small is-right has-text-success">
+                <i class="fas fa-check"></i>
+              </span>
+            </div>
+          </div>
+
+          <div class="field">
+              <label class="label">Date</label>
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="yyyy-mm-dd" formControlName="date" />
+              </div>
+            </div>
+
+          <div class="field">
+              <label class="label">Done</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" value="Y" name="done" formControlName="done"/>
+                  Yes
+                </label>
+                <label class="radio">
+                  <input type="radio" value="N" name="done" formControlName="done" />
+                  No
+                </label>
+              </div>
+            </div>
+
+            <input type="hidden" formControlName="children_id" />
+  
+          <div class="field">
+            <div class="control">
+              <button type="submit" class="button is-primary is-large is-fullwidth" [disabled]="!vaccineForm.valid">Add Vaccine</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
