@@ -40,7 +40,7 @@ function getDate(dob,days){
 }
 vaccinationRouter.post("/",function(req,res,next){
     if(req.body){
-        connection.insert("vaccination_history",req.body,function(err,rows){
+        connection.insert("vaccinations_history",req.body,function(err,rows){
             if(err){
                 next(err);
             }

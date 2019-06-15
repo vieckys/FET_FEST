@@ -26,7 +26,7 @@ childRouter.post("/",function(req,res,next){
 
 childRouter.put("/:id",function(req,res,next){
     if(req.body){
-        connection.update("children",req.body,{id:{operator:'=', value:req.body.id}},function(err,rows){
+        connection.update("children",req.body,{id:{operator:'=', value:req.body.id},user_id:{operator:'=', value:req.body.user_id}},function(err,rows){
             if(err){
                 next(err);
             }
