@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-add-child-card',
@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-child-card.component.scss']
 })
 export class AddChildCardComponent implements OnInit {
-
   constructor() { }
 
   ngOnInit() {

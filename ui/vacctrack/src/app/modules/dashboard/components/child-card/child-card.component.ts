@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-child-card',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./child-card.component.scss']
 })
 export class ChildCardComponent implements OnInit {
-
-  constructor() { }
+  @Input() child;
+  constructor() {
+   }
 
   ngOnInit() {
+    console.log('---->', this.child);
   }
 
 }
