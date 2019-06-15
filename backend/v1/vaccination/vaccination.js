@@ -84,7 +84,7 @@ vaccinationRouter.post("/:id",function(req,res,next){
 
 vaccinationRouter.get("/:id/:vaccineid",function(req,res,next){
     if(req.body){
-        connection.query("SELECT  id,children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done  from vaccinations_history where children_id='"+req.params.id+"' and vaccin_id='"+req.params.vaccineid+"'",function(err,rows){
+        connection.query("SELECT  id,children_id,vaccin_id,vaccinName,DATE_FORMAT(date, \"%Y-%m-%d\") as date,done  from vaccinations_history where children_id='"+req.params.id+"' and id='"+req.params.vaccineid+"'",function(err,rows){
             if(err){
                 next(err);
             }
