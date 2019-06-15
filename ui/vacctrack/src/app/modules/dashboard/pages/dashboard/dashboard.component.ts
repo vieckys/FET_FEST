@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ChildService } from 'src/app/services/child.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,33 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  childs: any = [{
-    id: 1,
-    name: 'Ankit',
-    age: 10,
-    gender: 'male',
-    weight: 20,
-    vaccine: {
-      id: 1,
-      name: 'Polio',
-      date: '2019-06-17'
-    }
-  }, {
-    id: 2,
-    name: 'Hemant',
-    age: 15,
-    gender: 'male',
-    weight: 30,
-    vaccine: {
-      id: 1,
-      name: 'Polio',
-      date: '2019-06-18'
-    }
-  }];
+  userId;
+  childs: any;
 
-  constructor() { }
+  constructor(private childService : ChildService, private authService : AuthService) {
+   }
+
+   getAllChildren() {
+    this.userId = this.authService.getUser().id;
+
+    this.childs = this.childService.getAll({
+      id: this.userId
+    });
+   }
 
   ngOnInit() {
+    this.getAllChildren();
   }
-
 }
