@@ -55,7 +55,7 @@ export class ChildCardComponent implements OnInit {
     if(this.notificationGranted()){
         var notification = new Notification('VaccTrack Notification', {
           icon: '',
-          body: `Next Vaccine Due for ${data.name} on ${data.vaccine.date} | ${data.vaccine.name}`,
+          body: `Next Vaccine Due for ${data.name} on | ${data.vaccine.name}`,
           lang: 'en',
           dir: 'auto'
         });
