@@ -17,6 +17,7 @@
           <p>Age: <b>{{child.age}}</b></p>
           <p>gender: <b>{{child.gender}}</b></p>
           <p>Next Vaccine Due <b>{{child.vaccine.name}}</b> | <b>{{child.vaccine.date}}</b></p>
+          <button class="is-link" (click)="notifyMe(child)">Remind Me</button>
         </div>
     
         <footer class="card-footer">
